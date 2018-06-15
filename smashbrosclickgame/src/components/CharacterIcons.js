@@ -1,11 +1,10 @@
 import React from 'react';
 
 
-
-// let iconClick = (event) => {
-//     event.target.id = "true"
-//     console.log(event.target.id)
-// }
+var iconStyle = {
+    maxHeight: "200px",
+    maxWidth: "200px"
+}
 
 
 
@@ -15,22 +14,9 @@ const CharacterIcons = props => (
 
             {/* {console.log(props)} */}
             {props.icons.map(icon => (
-                <button type="button" onClick={ props.increaseScore
-                    
-                    
-                    
-                //     function (event) {
-                //     event.preventDefault()
-                //     console.log(event.target.id)
-                //     if (event.target.id = "true") { console.log("You clicked a previously clicked button. You lose!") }
-                //     else if (event.target.id = "false") {
-                //         event.target.id = "true"
-                //     }
-                    
-                // }
-                } >
+                <button type="button" onClick={props.increaseScore} >
                     <div className="m-2">
-                        <img className="icon" id="false" src={icon.path} alt={icon.alt} />
+                        <img className="icon" id="false" src={icon.path} alt={icon.alt} style={iconStyle}/>
                     </div>
                 </button>
             ))}
