@@ -82,8 +82,13 @@ class Header extends Component {
     score: 0
   };
 
-  increaseScore = () => {
-    this.setState({ score: this.state.score + 1 });
+  increaseScore = (event) => {
+    console.log(event.target.id)
+    if (event.target.id === "false") {
+      event.target.id = "true"
+      this.setState({ score: this.state.score + 1 });
+    }
+    else { console.log("You have clicked this already.  You lose.") }
   };
 
 
@@ -91,19 +96,23 @@ class Header extends Component {
     return (
       <div className="container m-0 mw-100">
 
-      <div className="row bg-primary py-3 justify-content-center">
-  
-        <h1 className="text-white">Super Smash Bros Clicker Game!</h1>
-        <h3 className="text-white font-weight-light ml-5">Score: {this.state.score}</h3>
-  
-      </div>
+        <div className="row bg-primary py-3 justify-content-center">
 
-      <CharacterIcons
-        icons={icons}
-        count = {this.state.score}
-        increaseScore={this.increaseScore}
-      />
-    </div>
+          <h1 className="text-white">Super Smash Bros Clicker Game!</h1>
+          <h3 className="text-white font-weight-light ml-5">Score: {this.state.score}</h3>
+
+        </div>
+
+        <div className="justify-content-center">
+          <h5 className="text-center">Click a character icon to earn a point!  However, don't click the same one twice or you lose!</h5>
+          </div>
+
+        <CharacterIcons
+          icons={icons}
+          count={this.state.score}
+          increaseScore={this.increaseScore}
+        />
+      </div>
     )
   }
 
