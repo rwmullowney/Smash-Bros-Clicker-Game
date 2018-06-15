@@ -1,6 +1,7 @@
 import React from 'react';
 
 
+
 // let iconClick = (event) => {
 //     event.target.id = "true"
 //     console.log(event.target.id)
@@ -15,11 +16,13 @@ const CharacterIcons = props => (
             {console.log(props)}
             {props.icons.map(icon => (
                 <button type="button" onClick={function (event) {
+                    event.preventDefault()
                     console.log(event.target.id)
-                    if (event.target.id = "false") {
+                    if (event.target.id = "true") { console.log("You clicked a previously clicked button. You lose!") }
+                    else if (event.target.id = "false") {
                         event.target.id = "true"
                     }
-                    else if (event.target.id = "true") { console.log("You clicked a previously clicked button. You lose!") }
+                    
                 }} >
                     <div className="m-2">
                         <img className="icon" id="false" src={icon.path} alt={icon.alt} />
