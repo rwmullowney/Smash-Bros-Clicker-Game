@@ -15,10 +15,10 @@ const CharacterIcons = props => (
 
             {/* {console.log(props)} */}
             {/* Go through the array of icons to generate them on the page */}
-            {props.icons.map(icon => (
+            {props.icons.map((icon, index) => (
                 <button type="button" onClick={props.increaseScore} >
                     <div className="m-2">
-                        <img className="icon" id={icon.clicked} data-num={icon.id} src={icon.path} alt={icon.alt} style={iconStyle} />
+                        <img className="icon" id={icon.clicked} data-num={index} src={icon.path} alt={icon.alt} style={iconStyle} />
                     </div>
                 </button>
             ))}

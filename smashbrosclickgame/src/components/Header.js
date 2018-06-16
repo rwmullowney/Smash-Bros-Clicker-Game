@@ -104,12 +104,17 @@ class Header extends Component {
     // How does this automatically display the shuffle on the page?
     // NOTE THIS DOESN'T WORK.  It shuffles the pictures but it makes it so only the region has been clicked NOT the image itself
     // For some reason the images shuffle, but the true/false for clicked doesn't move with them
-    shuffle(icons);
+    console.log(icons);
 
     // Set id to true if false (to see whether the icon has been clicked)
     if (event.target.id === "false") {
-      event.target.id = "true"
-      console.log(event.target)
+      
+      let character = event.target.getAttribute("data-num");
+      icons[character].clicked = "true";
+      console.log(character);
+      
+      // event.target.id = "true"
+      console.log(event.target);
 
       // Increase score by 1
       this.setState({ score: this.state.score + 1});
@@ -127,6 +132,9 @@ class Header extends Component {
       this.setState( { score: 0 })
       // return this.renderPage();
     }
+    
+    
+    shuffle(icons);
   };
 
   // Did this to see if I could fix the clicked true/false issue but I'm not sure it's doing it
