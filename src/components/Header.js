@@ -88,8 +88,8 @@ function shuffle(a) {
   return a;
 }
 
-function highScore(){
-  
+function highScore() {
+
 };
 
 
@@ -100,7 +100,8 @@ class Header extends Component {
   // Set initial score to zero
   state = {
     score: 0,
-    highScore: 0
+    highScore: 0,
+    winLose: ""
   };
 
   // Define function for increasing score.  Passes in the specific button clicked
@@ -117,16 +118,21 @@ class Header extends Component {
 
       // Increase score by 1
       this.setState({ score: this.state.score + 1 });
+      console.log(this.state.winLose);
 
       // Determine if the player has won the game
       // TODO: Actually display a victory message on the page
       if (this.state.score + 1 === 12) {
-        console.log("You Win!")
-        this.state.score += 1 
 
-        if (this.state.score > this.state.highScore){
-          this.setState ({ highScore: this.state.score})
-        }
+        console.log("You Win!")
+        this.state.score += 1
+
+        if (this.state.score > this.state.highScore) {
+          this.setState({
+            highScore: this.state.score,
+            winLose: "You win! Click to play again!"
+          });
+        };
 
         this.setState({ score: 0 })
         // Reset the "clicked" status of all the characters
@@ -139,9 +145,12 @@ class Header extends Component {
     // Display a losing message
     else {
       console.log("You have clicked this already.  You lose.");
-      
-      if (this.state.score > this.state.highScore){
-        this.setState ({ highScore: this.state.score})
+
+      if (this.state.score > this.state.highScore) {
+        this.setState({ 
+          highScore: this.state.score,
+          winLose: "You lose! Click to play again!"
+         })
       }
 
       this.setState({ score: 0 })
@@ -156,36 +165,28 @@ class Header extends Component {
     shuffle(icons);
   };
 
-  // Did this to see if I could fix the clicked true/false issue but I'm not sure it's doing it
-  renderPage = () => {
-    return (
-      <div className="container m-0 mw-100">
-
-        <div className="row bg-primary py-3 justify-content-center">
-
-          <h1 className="text-white">Super Smash Bros Clicker Game!</h1>
-          <h3 className="text-white font-weight-light ml-5">Score: {this.state.score}</h3>
-          <h3 className="text-white font-weight-light ml-5">High Score: {this.state.highScore}</h3>
-
-        </div>
-
-        <div className="justify-content-center">
-          <h5 className="text-center">Click a character icon to earn a point!  However, don't click the same one twice or you lose!</h5>
-        </div>
-
-
-        <CharacterIcons
-          icons={icons}
-          count={this.state.score}
-          increaseScore={this.increaseScore}
-        />
-      </div>
-    )
-  }
-
   render() {
-    return this.renderPage()
-  }
+    return (<div className="container m-0 mw-100">
+
+      <div className="row bg-primary py-3 justify-content-center">
+
+        <h1 className="text-white">Super Smash Bros Clicker Game!</h1>
+        <h3 className="text-white font-weight-light ml-5">Score: {this.state.score}</h3>
+        <h3 className="text-white font-weight-light ml-5">High Score: {this.state.highScore}</h3>
+
+      </div>
+
+      <div className="justify-content-center">
+        <h5 className="text-center">Click a character icon to earn a point.  However, don't click the same one twice or you lose!</h5>
+        <h5 className="text-center">{this.state.winLose}</h5>
+      </div>
+
+      <CharacterIcons
+        icons={icons}
+        increaseScore={this.increaseScore}
+      />
+    </div>);
+  };
 
 };
 
