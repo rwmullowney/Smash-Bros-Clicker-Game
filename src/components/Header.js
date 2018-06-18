@@ -88,6 +88,10 @@ function shuffle(a) {
   return a;
 }
 
+function highScore(){
+  
+};
+
 
 
 
@@ -95,45 +99,61 @@ class Header extends Component {
 
   // Set initial score to zero
   state = {
-    score: 0
+    score: 0,
+    highScore: 0
   };
 
   // Define function for increasing score.  Passes in the specific button clicked
   increaseScore = (event) => {
 
-    // How does this automatically display the shuffle on the page?
-    // NOTE THIS DOESN'T WORK.  It shuffles the pictures but it makes it so only the region has been clicked NOT the image itself
-    // For some reason the images shuffle, but the true/false for clicked doesn't move with them
-    console.log(icons);
+    // console.log(icons);
 
-    // Set id to true if false (to see whether the icon has been clicked)
+    // Set 'clicked' to true if false
     if (event.target.id === "false") {
-      
+
       let character = event.target.getAttribute("data-num");
       icons[character].clicked = "true";
-      console.log(character);
-      
-      // event.target.id = "true"
-      console.log(event.target);
+      console.log(icons[character].alt);
+      // console.log(event.target);
 
       // Increase score by 1
-      this.setState({ score: this.state.score + 1});
+      this.setState({ score: this.state.score + 1 });
 
       // Determine if the player has won the game
       // TODO: Actually display a victory message on the page
       if (this.state.score + 1 === 12) {
         console.log("You Win!")
+        this.state.score += 1 
+
+        if (this.state.score > this.state.highScore){
+          this.setState ({ highScore: this.state.score})
+        }
+
+        this.setState({ score: 0 })
+        // Reset the "clicked" status of all the characters
+        icons.forEach((character) => {
+          character.clicked = "false";
+        });
       }
     }
 
     // Display a losing message
     else {
       console.log("You have clicked this already.  You lose.");
-      this.setState( { score: 0 })
-      // return this.renderPage();
-    }
-    
-    
+      
+      if (this.state.score > this.state.highScore){
+        this.setState ({ highScore: this.state.score})
+      }
+
+      this.setState({ score: 0 })
+
+      // Reset the "clicked" status of all the characters
+      icons.forEach((character) => {
+        character.clicked = "false";
+      });
+    };
+
+
     shuffle(icons);
   };
 
@@ -146,6 +166,7 @@ class Header extends Component {
 
           <h1 className="text-white">Super Smash Bros Clicker Game!</h1>
           <h3 className="text-white font-weight-light ml-5">Score: {this.state.score}</h3>
+          <h3 className="text-white font-weight-light ml-5">High Score: {this.state.highScore}</h3>
 
         </div>
 
@@ -153,7 +174,7 @@ class Header extends Component {
           <h5 className="text-center">Click a character icon to earn a point!  However, don't click the same one twice or you lose!</h5>
         </div>
 
-      
+
         <CharacterIcons
           icons={icons}
           count={this.state.score}
