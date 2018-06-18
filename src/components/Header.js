@@ -178,12 +178,12 @@ class Header extends Component {
 
       <div className="justify-content-center">
         <h5 className="text-center">Click a character icon to earn a point.  However, don't click the same one twice or you lose!</h5>
-        <h5 className="text-center">{this.state.winLose}</h5>
       </div>
 
       <CharacterIcons
         icons={icons}
         increaseScore={this.increaseScore}
+        winLose={this.state.winLose}
       />
     </div>);
   };

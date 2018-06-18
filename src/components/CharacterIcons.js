@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 var iconStyle = {
     maxHeight: "200px",
     maxWidth: "200px"
-  }
+}
 
 
 
@@ -22,6 +22,9 @@ const CharacterIcons = props => (
                     </div>
                 </button>
             ))}
+        </div>
+        <div className="row mt-3 justify-content-center">
+            <h5>{props.winLose}</h5>
         </div>
     </div>
 )
