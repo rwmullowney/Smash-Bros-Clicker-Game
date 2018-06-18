@@ -113,7 +113,6 @@ class Header extends Component {
 
       let character = event.target.getAttribute("data-num");
       icons[character].clicked = "true";
-      console.log(icons[character].alt);
       // console.log(event.target);
 
       // Increase score by 1
