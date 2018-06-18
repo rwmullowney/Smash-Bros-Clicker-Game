@@ -124,7 +124,6 @@ class Header extends Component {
       // TODO: Actually display a victory message on the page
       if (this.state.score + 1 === 12) {
 
-        console.log("You Win!")
         this.state.score += 1
 
         if (this.state.score > this.state.highScore) {
@@ -144,13 +143,12 @@ class Header extends Component {
 
     // Display a losing message
     else {
-      console.log("You have clicked this already.  You lose.");
 
       if (this.state.score > this.state.highScore) {
-        this.setState({ 
+        this.setState({
           highScore: this.state.score,
           winLose: "You lose! Click to play again!"
-         })
+        })
       }
 
       this.setState({ score: 0 })
